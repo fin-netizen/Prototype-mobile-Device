@@ -17,8 +17,9 @@ public class CameraScript : MonoBehaviour
         defaultBackground = background.texture;
         WebCamDevice[] devices = WebCamTexture.devices;
 
-        if(devices.Length == 0)
+        if (devices.Length == 0)
         {
+            Debug.Log("No Camera Available");
             isCamUsable = false;
             return;
         }
@@ -27,24 +28,29 @@ public class CameraScript : MonoBehaviour
         {
             if (!devices[i].isFrontFacing)
             {
-                camera = new WebCamTexture(devices[i].name, Screen.width, Screen.height, 60);
+                camera = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
             }
         }
 
-        if(camera == null)
+        if (camera == null)
         {
+            Debug.Log("Unable to find the Back Camera");
             return;
         }
+
+        camera.Play();
+        background.texture = camera;
+        isCamUsable = true;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if(!isCamUsable)
-        {
+        if (!isCamUsable)
+        
             return;
-        }
+        
 
         float ratio = (float.Parse(camera.width.ToString())) / float.Parse(camera.height.ToString());
         fit.aspectRatio = ratio;
@@ -55,4 +61,6 @@ public class CameraScript : MonoBehaviour
         int orient = -camera.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
     }
+
+
 }
