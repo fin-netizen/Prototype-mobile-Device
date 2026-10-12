@@ -921,8 +921,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TiltScript
   rb: {fileID: 2050829602}
-  compass: {fileID: 2050829598}
-  AccelerometerUpdateInterval: 0.05
+  speed: 10
+  AccelerometerUpdateInterval: 0.1
   LowPassKernelWidthInSeconds: 0.75
   lowPassValue: {x: 0, y: 0, z: 0}
   rotationValue: {x: 0, y: 0, z: 0, w: 1}
